@@ -6,6 +6,9 @@ import { formatCurrency } from '../../utils';
 import { orderAPI, productAPI, userAPI } from '../../services/api';
 import { normalizeProduct } from '../../hooks/useApi';
 
+
+// SVGImageElement
+
 export const AdminProducts = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [products, setProducts] = useState([]);
