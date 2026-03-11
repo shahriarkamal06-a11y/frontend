@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { API_BASE_URL, API_FALLBACK_BASE_URLS } from '../constants';
 import { storage } from '../utils';
 import { normalizeHomepageSection } from '../utils/homepageSections';
+
+const API_BASE_URL = 'https://backend-1-u836.onrender.com/api';
 
 const normalizeSectionRecord = (section = {}) => normalizeHomepageSection(section);
 
@@ -36,13 +37,7 @@ const isNetworkTimeoutError = (error) => (
 );
 
 const getNextFallbackBaseUrl = (config = {}) => {
-  const triedBaseUrls = new Set([
-    API_BASE_URL,
-    ...(config.__triedBaseUrls || []),
-    config.baseURL,
-  ].filter(Boolean));
-
-  return API_FALLBACK_BASE_URLS.find((baseUrl) => !triedBaseUrls.has(baseUrl)) || null;
+  return null;
 };
 
 const promoteResolvedBaseUrl = (baseURL) => {
@@ -106,21 +101,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      originalRequest
-      && RETRIABLE_READ_METHODS.has((originalRequest.method || 'get').toLowerCase())
-      && isNetworkTimeoutError(error)
-    ) {
-      const fallbackBaseUrl = getNextFallbackBaseUrl(originalRequest);
-
-      if (fallbackBaseUrl) {
-        return api({
-          ...originalRequest,
-          baseURL: fallbackBaseUrl,
-          __triedBaseUrls: [...(originalRequest.__triedBaseUrls || []), fallbackBaseUrl],
-        });
-      }
-    }
+    // Skip fallback logic for hardcoded backend
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;

@@ -11,15 +11,12 @@ import {
   sortProductsByIds,
 } from '../utils/pageBuilder';
 
-const DEFAULT_API_BASE_URL = 'http://localhost:3001/api';
+const DEFAULT_API_BASE_URL = 'https://backend-1-u836.onrender.com/api';
 
 const API_TIMEOUT_MS = 10000;
 
 const getApiBaseUrl = () =>
-  process.env.API_URL
-  || process.env.NEXT_PUBLIC_API_URL
-  || process.env.VITE_API_URL
-  || DEFAULT_API_BASE_URL;
+  DEFAULT_API_BASE_URL;
 
 const normalizeDomain = (value = '') => {
   if (!value) return '';

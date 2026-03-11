@@ -64,16 +64,9 @@ const getBrowserApiFallbackUrls = () => {
   return dedupeUrls([...urls, ...loopbackFallbacks]);
 };
 
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL
-  || getBrowserApiBaseUrl()
-  || 'http://localhost:3001/api';
+export const API_BASE_URL = 'https://backend-1-u836.onrender.com/api';
 
-export const API_FALLBACK_BASE_URLS = dedupeUrls(
-  process.env.NEXT_PUBLIC_API_URL
-    ? [process.env.NEXT_PUBLIC_API_URL]
-    : [API_BASE_URL, ...getBrowserApiFallbackUrls()]
-);
+export const API_FALLBACK_BASE_URLS = [API_BASE_URL];
 
 export const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '');
 
