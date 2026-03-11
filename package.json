@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "install": "npm install --legacy-peer-deps",
     "clean": "node -e \"const fs=require('fs'); fs.rmSync('.next',{ recursive:true, force:true });\"",
     "dev": "next dev -H 0.0.0.0",
     "dev:clean": "npm run clean && next dev -H 0.0.0.0",
