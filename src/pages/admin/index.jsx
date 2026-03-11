@@ -8,6 +8,7 @@ import { normalizeProduct } from '../../hooks/useApi';
 
 
 // SVGImageElement
+// thisn is veray bad 
 
 export const AdminProducts = () => {
   const [searchQuery, setSearchQuery] = useState('');
